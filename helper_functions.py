@@ -1,6 +1,6 @@
 from datetime import datetime
 from time import sleep
-import sys
+import subprocess
 def get_time_convert():
     current_datetime = datetime.now()
     current_date = current_datetime.strftime('%H:%M')
@@ -31,9 +31,14 @@ def track_time(start_time, time_limit):
             print('Timer done' * 100)
             break
         else:
-            print(f'time left in seconds: {i}')
-
-
+            with open("text.txt", 'w') as file:
+                file.write(f'time left in seconds: {i}')
+            #importint(f'time left in seconds: {i}')
+            subprocess.run(['cat text.txt | cowsay'], shell=True, check=True) #shell allows it to run as a single lined command
+            with open('text.txt', 'w') as file:
+                file.write('')
+        if i % 5 == 0:
+            subprocess.run(['clear'])
 
 
         sleep(1) #wait for one second to update loopme````
