@@ -34,7 +34,7 @@ def track_time(start_time, time_limit):
             pygame.mixer.music.load('/home/toomuchtosay/alarm_clock/Subwoofer Lullaby.mp3')
             pygame.mixer.music.play()
             sleep(100)
-            break
+            return True
         else:
             with open("text.txt", 'w') as file:
                 file.write(f'time left in seconds: {i}')
@@ -47,3 +47,8 @@ def track_time(start_time, time_limit):
             
 
         sleep(1) #wait for one second to update loopme````
+def play_alarm(status):
+    if status == True:
+        pygame.mixer.init()
+        pygame.mixer.music.load('/home/toomuchtosay/alarm_clock/Subwoofer Lullaby.mp3')
+        pygame.mixer.music.play()
