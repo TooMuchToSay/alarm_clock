@@ -1,6 +1,7 @@
 from datetime import datetime
 from time import sleep
 import subprocess
+import pygame
 def get_time_convert():
     current_datetime = datetime.now()
     current_date = current_datetime.strftime('%H:%M')
@@ -28,7 +29,11 @@ def track_time(start_time, time_limit):
     duration = (time_in_minutes_done - time_in_minutes_start) * 60 #gets seconds
     for i in range(duration, 0, -1):
         if i == 0:
-            print('Timer done' * 100)
+            subprocess(["echo 'TIMER IS UP' | cowsay"], shell=True)
+            pygame.mixer.init()
+            pygame.mixer.music.load('/home/toomuchtosay/alarm_clock/Subwoofer Lullaby.mp3')
+            pygame.mixer.music.play()
+            sleep(100)
             break
         else:
             with open("text.txt", 'w') as file:
@@ -39,6 +44,6 @@ def track_time(start_time, time_limit):
                 file.write('')
         if i % 5 == 0:
             subprocess.run(['clear'])
-
+            
 
         sleep(1) #wait for one second to update loopme````
