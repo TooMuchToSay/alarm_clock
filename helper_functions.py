@@ -1,5 +1,6 @@
 from datetime import datetime
 from time import sleep
+import sys
 def get_time_convert():
     current_datetime = datetime.now()
     current_date = current_datetime.strftime('%H:%M')
@@ -26,13 +27,13 @@ def track_time(start_time, time_limit):
     #get the time between done and start_time
     duration = (time_in_minutes_done - time_in_minutes_start) * 60 #gets seconds
     for i in range(duration, 0, -1):
-
-
-
-
         if i == 0:
             print('Timer done' * 100)
             break
         else:
             print(f'time left in seconds: {i}')
+
+
+
+
         sleep(1) #wait for one second to update loopme````
