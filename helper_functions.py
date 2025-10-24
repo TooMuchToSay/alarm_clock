@@ -41,17 +41,13 @@ def track_time(start_time, time_limit):
                 file.write(f'time left in seconds: {i}')
             #importint(f'time left in seconds: {i}')
             subprocess.run(['cat text.txt | cowsay'], shell=True, check=True) #shell allows it to run as a single lined command
-            with open('text.txt', 'w') as file:
-                file.write('')
-        #if i % 5 == 0:
-         #   subprocess.run(['clear'])
-            
-
-        sleep(1) #wait for one second to update loopme````
+        with open('text.txt', 'w') as file:
+            file.write('')
+        sleep(1)
 def play_alarm(status):
     pygame.mixer.init()
     pygame.mixer.music.load(sys.argv[1]) #plays any track as alarm if you give it the update
-    pygame.mixer.music.play()
+    pygame.mixer.music.play(loops=-1) #loops each time
     exit = input("input EXIT to stop alarm sound")
     match exit:
         case 'EXIT':
