@@ -11,24 +11,22 @@ def get_time_convert():
 
 def get_time_limit():
     try:
-        time_limit = int(input("length of timer in minutes: "))
+        time_limit = input("length of timer in 'minutes:seconds! ").strip()
     except ValueError:
-        print('Sorry the inputted time was not convertible to a float')
+        print('Sorry the inputted time was not convertible to a int')
         get_time_limit()
     return time_limit
 
-def convert_time(time):
+def convert_time(time): #THIS IS CALLED FOR BOTH THE START TIME AND THE END TIME BECAUSE IT WORKS FOR BOTH H>M CONVERSION AND M>S CONVERSION
     time = time.split(':')
     minutes = int(time[0]) * 60 + int(time[1])
     return minutes
 
 def track_time(start_time, time_limit):
-    time = start_time.split(":")
-    time_in_minutes_start = int(time[0]) * 60 + int(time[1])
-    time_in_minutes_done = time_in_minutes_start + time_limit
-    #gives you minutes since midnight
-    #get the time between done and start_time
-    duration = (time_in_minutes_done - time_in_minutes_start) * 60 #gets seconds
+    time = convert_time(time_limit)
+    start_time = convert_time(start_time)
+    time_in_minutes_done = time + start_time
+    duration = (time_in_minutes_done - start_time) #gets seconds
     for i in range(duration, 0, -1):
         if i == 0:
             subprocess(["echo 'TIMER IS UP' | cowsay"], shell=True)
@@ -39,11 +37,11 @@ def track_time(start_time, time_limit):
         else:
             with open("text.txt", 'w') as file:
                 file.write(f'time left in seconds: {i}')
-            #importint(f'time left in seconds: {i}')
             subprocess.run(['cat text.txt | cowsay'], shell=True, check=True) #shell allows it to run as a single lined command
         with open('text.txt', 'w') as file:
             file.write('')
         sleep(1)
+
 def play_alarm(status):
     pygame.mixer.init()
     pygame.mixer.music.load(sys.argv[1]) #plays any track as alarm if you give it the update
