@@ -4,6 +4,7 @@ import subprocess
 import pygame
 import sys
 from os import listdir
+from ascii_art import cat
 
 def get_alarm_list():
     choices = listdir("sounds")
@@ -41,11 +42,13 @@ def track_time(start_time, time_limit):
         if i == 0:
             return True
         else:
-            with open("text.txt", 'w') as file:
-                file.write(f'time left in seconds: {i}')
-            subprocess.run(['cat text.txt | cowsay'], shell=True, check=True) #shell allows it to run as a single lined command
-        with open('text.txt', 'w') as file:
-            file.write('')
+            message = cat(f'You have {i} seconds left')
+            print(message)
+            #with open("text.txt", 'w') as file:
+             #file.write(f'time left in seconds: {i}')
+             #shell allows it to run as a single lined command
+        #with open('text.txt', 'w') as file:
+         #   file.write('')
         sleep(1)
 
 def play_alarm(status, choice):
