@@ -25,7 +25,7 @@ def get_time_limit():
         time_limit = input("length of timer in 'minutes:seconds! ").strip()
     except ValueError:
         print('Sorry the inputted time was not convertible to a int')
-        get_time_limit()
+        get_time_limit('')
     return time_limit
 
 def convert_time(time): #THIS IS CALLED FOR BOTH THE START TIME AND THE END TIME BECAUSE IT WORKS FOR BOTH H>M CONVERSION AND M>S CONVERSION
@@ -34,6 +34,11 @@ def convert_time(time): #THIS IS CALLED FOR BOTH THE START TIME AND THE END TIME
     return minutes
 
 def track_time(start_time, time_limit):
+    #block of code that hardcodes the song you want to play while the time is going
+    pygame.mixer.init()
+    pygame.mixer.music.load('sounds/subwooferlullaby.mp3')
+    pygame.mixer.music.play(loops=-1)
+    #end of block#
     time = convert_time(time_limit)
     start_time = convert_time(start_time)
     time_in_minutes_done = time + start_time
@@ -41,14 +46,25 @@ def track_time(start_time, time_limit):
     for i in range(duration, -1, -1):
         subprocess.run(['clear'])
         if i == 0:
+            pygame.mixer.music.stop()
             print(cat('LE TEMPS EST FINIT'))
             return True
         else:
             message = cat(f'You have {i} seconds left')
             print(message)
- 
         sleep(1)
-       
+
+def play_waiting_song(duration):
+    duration = convert_time(duration)
+    choices = get_alarm_list()
+    pygame.mixer.init()
+    pygame.mixer.music.load(choices)
+    pygame.mixer.music.play(loops=-1)
+    for i in range(duration, 0, -1):
+        if i == 1:
+            pygame.music.mixer.stop()
+        sleep(1)
+        
 def play_alarm(status, choice):
     pygame.mixer.init()
     pygame.mixer.music.load(choice) #plays any track as alarm if you give it the update
