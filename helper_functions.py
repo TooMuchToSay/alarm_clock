@@ -43,15 +43,23 @@ def track_time(start_time, time_limit):
     start_time = convert_time(start_time)
     time_in_minutes_done = time + start_time
     duration = (time_in_minutes_done - start_time) #gets seconds
+    message_loop_tracker = 0
     for i in range(duration, -1, -1):
         subprocess.run(['clear'])
         if i == 0:
             pygame.mixer.music.stop()
-            print(cat('LE TEMPS EST FINIT'))
+            print(cat('LE TEMPS EST FINIT', message_loop_tracker))
             return True
         else:
-            message = cat(f'You have {i} seconds left')
-            print(message)
+            if message_loop_tracker < 22: 
+                message = cat(f'You have {i} seconds left', message_loop_tracker)
+                print(message.strip())
+                message_loop_tracker += 1
+            elif message_loop_tracker == 22:
+                message_loop_tracker = 0
+                message = cat(f'You have {i} seconds left', message_loop_tracker)
+                print(message.strip())
+
         sleep(1)
 
 def play_waiting_song(duration):
