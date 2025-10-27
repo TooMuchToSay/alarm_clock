@@ -38,24 +38,22 @@ def track_time(start_time, time_limit):
     start_time = convert_time(start_time)
     time_in_minutes_done = time + start_time
     duration = (time_in_minutes_done - start_time) #gets seconds
-    for i in range(duration, 0, -1):
+    for i in range(duration, -1, -1):
+        subprocess.run(['clear'])
         if i == 0:
+            print(cat('LE TEMPS EST FINIT'))
             return True
         else:
             message = cat(f'You have {i} seconds left')
             print(message)
-            #with open("text.txt", 'w') as file:
-             #file.write(f'time left in seconds: {i}')
-             #shell allows it to run as a single lined command
-        #with open('text.txt', 'w') as file:
-         #   file.write('')
+ 
         sleep(1)
-
+       
 def play_alarm(status, choice):
     pygame.mixer.init()
     pygame.mixer.music.load(choice) #plays any track as alarm if you give it the update
     pygame.mixer.music.play(loops=-1) #loops each time
-    exit = input("input EXIT to stop alarm sound")
+    exit = input("input EXIT to stop alarm sound: ")
     match exit:
         case 'EXIT':
             sys.exit(0)
