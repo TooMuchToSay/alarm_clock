@@ -35,10 +35,10 @@ def convert_time(time): #THIS IS CALLED FOR BOTH THE START TIME AND THE END TIME
 
 def track_time(start_time, time_limit):
     #block of code that hardcodes the song you want to play while the time is going
-    song_options = listdir['~/home/jacob/alarm_clock/sounds']
-    random = randoppiint(0, len(song_options))
+    song_options = listdir('sounds')
+    random = randint(0, len(song_options) - 1)
     pygame.mixer.init()
-    pygame.mixer.music.load(f'{song_options[random]}')
+    pygame.mixer.music.load(f'sounds/{song_options[random]}')
     pygame.mixer.music.play(loops=-1)
     #end of block#
     time = convert_time(time_limit)
