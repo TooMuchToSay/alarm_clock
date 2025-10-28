@@ -5,7 +5,7 @@ import pygame
 import sys
 from os import listdir
 from ascii_art import cat
-
+from random import randint
 def get_alarm_list():
     choices = listdir("sounds")
     for number in range(0, len(choices)):
@@ -35,8 +35,10 @@ def convert_time(time): #THIS IS CALLED FOR BOTH THE START TIME AND THE END TIME
 
 def track_time(start_time, time_limit):
     #block of code that hardcodes the song you want to play while the time is going
+    song_options = listdir['~/home/jacob/alarm_clock/sounds']
+    random = randoppiint(0, len(song_options))
     pygame.mixer.init()
-    pygame.mixer.music.load('sounds/SubwooferLullaby.mp3')
+    pygame.mixer.music.load(f'{song_options[random]}')
     pygame.mixer.music.play(loops=-1)
     #end of block#
     time = convert_time(time_limit)
