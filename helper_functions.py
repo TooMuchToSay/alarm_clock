@@ -33,6 +33,13 @@ def convert_time(time): #THIS IS CALLED FOR BOTH THE START TIME AND THE END TIME
     minutes = int(time[0]) * 60 + int(time[1])
     return minutes
 
+def time_presentation(seconds):
+    time = seconds
+    remainder_h = round(time/3600)
+    remainder_m = round((time - remainder_h* 3600)/60)
+    remainder_s = round((time - remainder_h*3600)-(remainder_m * 60))
+    return f"{remainder_h}:{remainder_m}:{remainder_s}"
+
 def track_time(start_time, time_limit):
     #block of code that hardcodes the song you want to play while the time is going
     song_options = listdir('sounds')
@@ -54,14 +61,13 @@ def track_time(start_time, time_limit):
             return True
         else:
             if message_loop_tracker < 22: 
-                message = cat(f'You have {i} seconds left', message_loop_tracker)
+                message = cat(f'You have {time_presentation(i)} seconds left', message_loop_tracker)
                 print(message.strip())
                 message_loop_tracker += 1
             elif message_loop_tracker == 22:
                 message_loop_tracker = 0
-                message = cat(f'You have {i} seconds left', message_loop_tracker)
+                message = cat(f'You have {time_presentation(i)} seconds left', message_loop_tracker)
                 print(message.strip())
-
         sleep(1)
 
 def play_waiting_song(duration):
