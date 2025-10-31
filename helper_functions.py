@@ -34,11 +34,28 @@ def convert_time(time): #THIS IS CALLED FOR BOTH THE START TIME AND THE END TIME
     return minutes
 
 def time_presentation(seconds):
-    time = seconds
-    remainder_h = round(time/3600)
-    remainder_m = round((time - remainder_h* 3600)/60)
-    remainder_s = round((time - remainder_h*3600)-(remainder_m * 60))
-    return f"{remainder_h}:{remainder_m}:{remainder_s}"
+    time = seconds  
+
+    #print(f"Starting countdown from {seconds} seconds...")
+
+    if time > 0:
+        
+        remainder_h = time // 3600
+        
+        seconds_after_h = time % 3600
+        remainder_m = seconds_after_h // 60
+        
+        remainder_s = seconds_after_h % 60
+        
+        time_str = f"{remainder_h:02d}:{remainder_m:02d}:{remainder_s:02d}"
+        
+        sys.stdout.write(f"Remaining: {time_str}")
+        sys.stdout.flush() 
+        sys.stdout.write('\r') 
+
+    #print("\nCountdown complete! The timer reached 00:00:00.")
+    
+    return f"{time_str}"
 
 def track_time(start_time, time_limit):
     #block of code that hardcodes the song you want to play while the time is going
@@ -67,7 +84,7 @@ def track_time(start_time, time_limit):
             elif message_loop_tracker == 22:
                 message_loop_tracker = 0
                 message = cat(f'You have {time_presentation(i)} seconds left', message_loop_tracker)
-                print(message.strip())
+                print(message)
         sleep(1)
 
 def play_waiting_song(duration):
