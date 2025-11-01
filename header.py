@@ -5,6 +5,7 @@ from helper_functions import track_time
 from helper_functions import play_alarm
 from helper_functions import get_alarm_list
 from helper_functions import play_waiting_song
+from helper_functions import start_threading
 def main():
     #have user define if they want to start the time
     #call function to capture time
@@ -13,6 +14,7 @@ def main():
     choice = get_alarm_list()
     #play_waiting_song(time_limit)
     #print(time_limit)
+    start_threading()
     status = track_time(start_time, time_limit)
     play_alarm(status, choice)
     #count time till amount of time has passed
